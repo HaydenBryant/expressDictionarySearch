@@ -6,20 +6,21 @@ const data = require("./data");
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
-// app.get('/', (req, res) => res.send('Hello World!'))
+app.use(express.static('public'))
 
 app.get('/', function(req, res) {
-    res.sendfile(__dirname + "/index.html");
+    res.sendfile("index.html");
 });
 
 app.post('/', function(req, res) {
     var searchWord = req.body.searchWord;
 
     if (data[searchWord]) {
-        res.send("<h1>" + searchWord + " is in the dictionary</h1>");
+        res.send("<h2>" + searchWord + " is in the dictionary</h1>");
+        
     }
     else {
-        res.send("<h1>" + searchWord + "is not in the dictionary</h1>");
+        res.send("<h2>" + searchWord + " is not in the dictionary</h1>");
     }
     res.end
 });
